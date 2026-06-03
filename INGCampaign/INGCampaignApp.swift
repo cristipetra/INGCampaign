@@ -9,9 +9,12 @@ import SwiftUI
 
 @main
 struct INGCampaignApp: App {
+    
+    @State private var appDIContainer = AppDependencyContainer()
+    
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            TargetingSelectionView(viewModel: appDIContainer.makeTargetingSelectionViewModel())
         }
     }
 }

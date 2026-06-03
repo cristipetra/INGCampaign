@@ -11,4 +11,8 @@ public struct MockTargetingCategoryServices: TargetingCategoryServicesProtocol {
     public func getTargets() async throws -> [TargetingCategory] {
         return MockTargetingCategory().targets
     }
+    
+    public func getTargetsSecond() async throws -> [TargetingCategory] {
+        return MockTargetingCategory().targets
+    }
 }

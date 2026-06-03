@@ -11,9 +11,16 @@ public protocol TargetingCategoryServicesProtocol {
     func getTargets() async throws -> [TargetingCategory]
 }
 
-public class TargetingCategoryServices: TargetingCategoryServicesProtocol {
-    public init() { }
+public class TargetingCategoryServices: TargetingCategoryServicesProtocol {    
+    private let apiClient: APIClientProtocol
+    
+    public init(apiClient: APIClientProtocol) {
+        self.apiClient = apiClient
+    }
+    
     public func getTargets() async throws -> [TargetingCategory] {
-        return MockTargetingCategory().targets
+        let targets: [TargetingCategory] = try await apiClient.send(endpoint: .getTargets)
+        
+        return targets
     }
 }
