@@ -6,10 +6,10 @@
 //
 import Foundation
 
-public struct CampaignChannel: Codable, Identifiable, Sendable {
-    public let id: UUID = UUID()
-    let channel: String
-    let channelId: String
+public struct CampaignChannel: Codable, Identifiable, Sendable, Equatable, Hashable {
+    public var id: String { channelId }
+    public let channel: String
+    public let channelId: String
     
     enum CodingKeys: String, CodingKey {
         case channel

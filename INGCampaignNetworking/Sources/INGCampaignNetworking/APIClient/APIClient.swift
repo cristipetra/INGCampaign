@@ -31,6 +31,8 @@ public final class APIClient: APIClientProtocol {
     public func send<T: Decodable>(endpoint: APIEndpoint) async throws -> T {
         let url = apiConfiguration.baseURL.appendingPathComponent(endpoint.path)
         
+        print(url)
+        
         let request = URLRequest(url: url)
         
         let (data, response) = try await session.data(for: request)
