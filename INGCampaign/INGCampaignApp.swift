@@ -14,7 +14,8 @@ struct INGCampaignApp: App {
     
     var body: some Scene {
         WindowGroup {
-            TargetingSelectionView(viewModel: appDIContainer.makeTargetingSelectionViewModel())
+            AppRootView(container: appDIContainer)
+                
         }
     }
 }
