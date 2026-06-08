@@ -27,15 +27,20 @@ class ChannelListViewModel: ChannelListViewModelling {
     @Published internal var campaignChannels: [CampaignChannel]
     private var services: ChannelServicesProtocol
     private let router: AppRouterProtocol
+    private let campaingManager: CampaignConfigurationManagerProtocol
     
     @Published public var isLoading: Bool = false
     @Published public var errorMessage: String?
     
-    public init(campaignChannels: [CampaignChannel], services: ChannelServicesProtocol, router: AppRouterProtocol) {
+    public init(campaignChannels: [CampaignChannel],
+                services: ChannelServicesProtocol,
+                router: AppRouterProtocol,
+                campaingManager: CampaignConfigurationManagerProtocol)
+    {
         self.campaignChannels = campaignChannels
-        print(campaignChannels)
         self.services = services
         self.router = router
+        self.campaingManager = campaingManager
     }
     
 //    func loadChannelDetail(channelId: String) async throws -> CampaignChannel {

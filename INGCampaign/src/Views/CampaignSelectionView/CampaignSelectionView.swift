@@ -22,12 +22,16 @@ struct CampaignSelectionView<ViewModel: CampaignSelectionViewModelling>: View {
                 
                 Text(viewModel.channel.channel)
                 
-                if let channelPricing: ChannelPricing = viewModel.channelPricing {
-                    ForEach(channelPricing.monthlyFees.indices, id: \.self) { idx in
-                        CampaignSelectionItemView(monthlyFee: channelPricing.monthlyFees[idx])
-                            .background(
-                                idx % 2 == 0 ? Color.blue.opacity(0.1) :  Color.green.opacity(0.1)
-                            )
+                ForEach(viewModel.pricingRows) { row in
+                    CampaignSelectionItemView(
+                        monthlyFee: row.monthlyFee,
+                        isChecked: row.isChecked
+                    )
+                    .background(Color.gray.opacity(0.1))
+                    .onTapGesture {
+                        viewModel.onSelectedCampaignPricing(
+                            monthlyFee: row.monthlyFee
+                        )
                     }
                 }
             }

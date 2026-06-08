@@ -9,13 +9,17 @@ import SwiftUI
 import INGCampaignModels
 
 struct CampaignSelectionItemView: View {
-    var monthlyFee: MonthlyFee
+    let monthlyFee: MonthlyFee
+    let isChecked: Bool
     
-    @State var isChecked: Bool = false
+    init(monthlyFee: MonthlyFee, isChecked: Bool) {
+        self.monthlyFee = monthlyFee
+        self.isChecked = isChecked
+    }
     
     var body: some View {
         HStack {
-            CheckboxView(isChecked: ($isChecked))
+            CheckboxView(isChecked: .constant(isChecked))
             
             VStack {
                 ForEach(monthlyFee.details, id: \.self) { detail in
@@ -45,7 +49,7 @@ struct CheckboxView: View {
 
     var body: some View {
         Button {
-            isChecked.toggle()
+            //isChecked.toggle()
         } label: {
             HStack {
                 Image(systemName: isChecked

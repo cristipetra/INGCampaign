@@ -20,9 +20,3 @@ public struct MonthlyFee: Codable, Equatable, Hashable {
     public let details: [String]
     public let currency: String
 }
-
-extension MonthlyFee {
-    func getFormattedDetails() -> String {
-       return ""
-    }
-}
