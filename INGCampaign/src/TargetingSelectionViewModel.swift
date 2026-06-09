@@ -31,7 +31,11 @@ class TargetingSelectionViewModel: TargetingSelectionViewModelling {
     private let router: AppRouterProtocol
     
     @Published var targetingCategories: [TargetingCategory] = []
-    @Published var selectedCategories: [TargetingCategory] = []
+    @Published var selectedCategories: [TargetingCategory] = [] {
+        didSet {
+            campaignManager.selectedCategories = selectedCategories
+        }
+    }
     
     private var campaignManager: CampaignConfigurationManagerProtocol
     
@@ -62,10 +66,8 @@ class TargetingSelectionViewModel: TargetingSelectionViewModelling {
     func onTapCategory(_ category: TargetingCategory) {
         if !selectedCategories.contains(where: { $0.id == category.id } ) {
             selectedCategories.append(category)
-            campaignManager.selectedCategories.append(category)
         } else {
             selectedCategories.removeAll(where: { $0.id == category.id } )
-            campaignManager.selectedCategories.removeAll(where: { $0.id == category.id } )
         }
     }
     
