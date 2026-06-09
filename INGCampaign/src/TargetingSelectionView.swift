@@ -26,7 +26,7 @@ struct TargetingSelectionView<ViewModel: TargetingSelectionViewModelling>: View 
             
             List {
                 
-                ForEach(viewModel.targetingCategories) { item in                    
+                ForEach(viewModel.targetingCategories) { item in
                     Text(item.target)
                         .frame(maxWidth: .infinity, alignment: .leading)  // fill the row width
                         .contentShape(Rectangle())
@@ -43,7 +43,6 @@ struct TargetingSelectionView<ViewModel: TargetingSelectionViewModelling>: View 
                 }
                 
             }
-        
         
             Button("Continue") {
                 viewModel.onTapContinue()

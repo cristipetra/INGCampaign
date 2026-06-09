@@ -24,6 +24,7 @@ protocol TargetingSelectionViewModelling: ObservableObject {
     func onTapContinue()
 }
 
+
 class TargetingSelectionViewModel: TargetingSelectionViewModelling {
     
     private var services: TargetingCategoryServicesProtocol
@@ -32,14 +33,19 @@ class TargetingSelectionViewModel: TargetingSelectionViewModelling {
     @Published var targetingCategories: [TargetingCategory] = []
     @Published var selectedCategories: [TargetingCategory] = []
     
+    private var campaignManager: CampaignConfigurationManagerProtocol
+    
     @Published public var isLoading: Bool = false
     @Published public var errorMessage: String?
     
-    public init(services: TargetingCategoryServicesProtocol, router: AppRouterProtocol) {
+    public init(services: TargetingCategoryServicesProtocol,
+                router: AppRouterProtocol,
+                campaignManager: CampaignConfigurationManagerProtocol) {
         self.services = services
         self.router = router
+        self.campaignManager = campaignManager
     }
-    
+
     func loadTargetingCategories() async {
         isLoading = true
         defer {
@@ -47,7 +53,7 @@ class TargetingSelectionViewModel: TargetingSelectionViewModelling {
         }
         do {
             targetingCategories = try await services.getTargets()
-            print(targetingCategories)
+            selectedCategories = campaignManager.selectedCategories
         } catch {
             errorMessage = "Failed to fetch targeting categories. Please try again later."
         }
@@ -56,6 +62,10 @@ class TargetingSelectionViewModel: TargetingSelectionViewModelling {
     func onTapCategory(_ category: TargetingCategory) {
         if !selectedCategories.contains(where: { $0.id == category.id } ) {
             selectedCategories.append(category)
+            campaignManager.selectedCategories.append(category)
+        } else {
+            selectedCategories.removeAll(where: { $0.id == category.id } )
+            campaignManager.selectedCategories.removeAll(where: { $0.id == category.id } )
         }
     }
     
@@ -68,4 +78,5 @@ class TargetingSelectionViewModel: TargetingSelectionViewModelling {
         let channels: Set<CampaignChannel> = Set(selectedCategories.flatMap { $0.availableChannels })
         return Array(channels)
     }
+
 }

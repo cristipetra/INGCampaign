@@ -11,9 +11,13 @@ internal import Combine
 protocol CampaignConfigurationManagerProtocol {
     var selectedTargetIDs: Set<String> { get set }
     var selectedCampaigns: [String: MonthlyFee] { get set }
+    
+    var selectedCategories: [TargetingCategory] { get set }
 }
 
 class CampaignConfigurationManager: CampaignConfigurationManagerProtocol {
     @Published var selectedTargetIDs: Set<String> = []
     @Published var selectedCampaigns: [String: MonthlyFee] = [:]
+    
+    @Published var selectedCategories: [TargetingCategory] = []
 }

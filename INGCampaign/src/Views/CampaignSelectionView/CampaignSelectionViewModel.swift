@@ -26,7 +26,7 @@ class CampaignSelectionViewModel: CampaignSelectionViewModelling {
     internal var channel: CampaignChannel
     private var services: ChannelServicesProtocol
     private let router: AppRouterProtocol
-    private var campaignManager: CampaignConfigurationManagerProtocol
+    private var campaignManager: CampaignConfigurationManagerProtocol 
     
     @Published public var isLoading: Bool = false
     @Published public var errorMessage: String?

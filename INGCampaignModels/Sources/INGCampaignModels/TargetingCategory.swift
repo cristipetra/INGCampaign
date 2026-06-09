@@ -8,7 +8,7 @@
 import Foundation
 
 public struct TargetingCategory: Codable, Identifiable {
-    public let id = UUID()
+    public var id: String { target }
     public let target: String
     public let availableChannels: [CampaignChannel]
     

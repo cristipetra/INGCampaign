@@ -32,7 +32,7 @@ class AppDependencyContainer: DependencyContainer {
         
     // ViewModels
     func makeTargetingSelectionViewModel(router: AppRouterProtocol) -> TargetingSelectionViewModel {
-        TargetingSelectionViewModel(services: targetingCategoryServices, router: router)
+        TargetingSelectionViewModel(services: targetingCategoryServices, router: router, campaignManager: campaignManager)
     }
     
     func makeChannelListViewModel(campaignChannels: [CampaignChannel], router: AppRouterProtocol) -> ChannelListViewModel {
