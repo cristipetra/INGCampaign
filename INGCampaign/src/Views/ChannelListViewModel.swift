@@ -16,10 +16,8 @@ protocol ChannelListViewModelling: ObservableObject {
     var isLoading: Bool { get }
     var errorMessage: String? { get }
     
-    //func loadChannelDetail(channelId: String) async throws -> CampaignChannel
-    func loadChannelsDetails() async
-    
     func onTapChannel(channel: CampaignChannel)
+    func onTapReviewSelection()
 }
 
 class ChannelListViewModel: ChannelListViewModelling {
@@ -43,26 +41,12 @@ class ChannelListViewModel: ChannelListViewModelling {
         self.campaingManager = campaingManager
     }
     
-//    func loadChannelDetail(channelId: String) async throws -> CampaignChannel {
-//        try await services.getChanellDetails(channelId: channelId)
-//    }
-    
-    func loadChannelsDetails() async {
-        var channels: [CampaignChannel] = []
-        for channel in campaignChannels {
-            do {
-                //let campaignChannel = try await loadChannelDetail(channelId: channel.channelId)
-                //channels.append(campaignChannel)
-            } catch {
-                print("Error loading channel: \(error)")
-            }
-        }
-        
-        campaignChannels = channels
-    }
-    
     func onTapChannel(channel: CampaignChannel) {
         router.navigate(to: .campaignSelection(channel: channel))
+    }
+    
+    func onTapReviewSelection() {
+        router.navigate(to: .reviewSelection)
     }
     
 }

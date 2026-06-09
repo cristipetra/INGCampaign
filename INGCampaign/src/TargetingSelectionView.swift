@@ -16,26 +16,42 @@ struct TargetingSelectionView<ViewModel: TargetingSelectionViewModelling>: View 
     }
     
     var body: some View {
-        List {
-            Section {
-                Text("Choose your targeting")
-                Text("Select one or more targeting options.")
-            }
+        VStack(spacing: 10) {
             
-            ForEach(viewModel.targetingCategories) { item in
-                Text(item.target)
-                    .onTapGesture(perform: {
-                        print("\(item.target)")
-                        viewModel.onTapCategory(item)
-                    })
-            }
+            Spacer()
+                .frame(height: 20)
             
-            Section {
-                Button("Continue") {
-                    viewModel.onTapContinue()
+            Text("Choose your targeting")
+            Text("Select one or more targeting options.")
+            
+            List {
+                
+                ForEach(viewModel.targetingCategories) { item in                    
+                    Text(item.target)
+                        .frame(maxWidth: .infinity, alignment: .leading)  // fill the row width
+                        .contentShape(Rectangle())
+                        .onTapGesture(perform: {
+                            print("\(item.target)")
+                            viewModel.onTapCategory(item)
+                        })
+                        .listRowBackground(
+                            viewModel.selectedCategories.contains(where: { $0.id == item.id })
+                                    ? Color.blue
+                                    : Color.white
+                            )
+
                 }
+                
             }
-            
+        
+        
+            Button("Continue") {
+                viewModel.onTapContinue()
+            }
+            .buttonStyle(.borderedProminent)
+            .controlSize(.large)
+            .padding(.horizontal)
+            .disabled(viewModel.selectedCategories.isEmpty)
         }
         .task {
             await viewModel.loadTargetingCategories()

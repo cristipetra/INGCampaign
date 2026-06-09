@@ -24,7 +24,6 @@ protocol TargetingSelectionViewModelling: ObservableObject {
     func onTapContinue()
 }
 
-
 class TargetingSelectionViewModel: TargetingSelectionViewModelling {
     
     private var services: TargetingCategoryServicesProtocol
