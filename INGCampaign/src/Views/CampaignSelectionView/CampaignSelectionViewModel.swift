@@ -14,6 +14,8 @@ protocol CampaignSelectionViewModelling: ObservableObject {
     var channel: CampaignChannel { get }
     var channelPricing: ChannelPricing? { get }
     var pricingRows: [CampaignPricingRow] { get }
+    var isLoading: Bool { get }
+    var errorMessage: String? { get }
     
     func loadChannelsDetails() async
     func onSelectedCampaignPricing(monthlyFee: MonthlyFee)

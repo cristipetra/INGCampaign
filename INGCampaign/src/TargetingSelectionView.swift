@@ -52,6 +52,11 @@ struct TargetingSelectionView<ViewModel: TargetingSelectionViewModelling>: View 
             .padding(.horizontal)
             .disabled(viewModel.selectedCategories.isEmpty)
         }
+        .overlay {
+             if viewModel.isLoading {
+                 ProgressView()
+             } 
+         }
         .task {
             await viewModel.loadTargetingCategories()
         }

@@ -35,7 +35,13 @@ struct ChannelListView<ViewModel: ChannelListViewModelling>: View {
             .buttonStyle(.borderedProminent)
             .controlSize(.large)
         }
+        .overlay {
+             if viewModel.isLoading {
+                 ProgressView()
+             }
+         }
     }
+    
 }
 
 #Preview {

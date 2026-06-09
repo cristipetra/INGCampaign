@@ -43,6 +43,11 @@ struct CampaignSelectionView<ViewModel: CampaignSelectionViewModelling>: View {
                 
             }
         }
+        .overlay {
+             if viewModel.isLoading {
+                 ProgressView()
+             }
+         }
         .task {
             await viewModel.loadChannelsDetails()
         }
