@@ -26,13 +26,10 @@ struct CampaignReviewSelectionView<ViewModel: CampaignReviewSelectionViewModelli
                         monthlyFee: row.monthlyFee,
                         isChecked: true
                     )
-                    
                 }
                 
                 Button("Send email") {
-                    Task {
-                        try await viewModel.onTapSendEmail()
-                    }
+                    viewModel.onTapSendEmail()
                 }
                 .buttonStyle(.borderedProminent)
                 .controlSize(.large)
