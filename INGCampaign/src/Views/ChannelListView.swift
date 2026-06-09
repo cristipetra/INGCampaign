@@ -17,7 +17,7 @@ struct ChannelListView<ViewModel: ChannelListViewModelling>: View {
     }
     
     var body: some View {
-        VStack {
+        VStack(spacing: 10) {
             Text("Avaialble channel list view")
             
             List(viewModel.campaignChannels) { channel in

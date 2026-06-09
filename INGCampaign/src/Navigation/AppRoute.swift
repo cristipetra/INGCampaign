@@ -29,8 +29,6 @@ protocol ViewFactory {
     @ViewBuilder func view(container: AppDependencyContainer) -> V
 }
 
-
-
 @MainActor
 class AppRouter: ObservableObject {
     @Published var path: NavigationPath = NavigationPath()
@@ -52,16 +50,6 @@ class AppRouter: ObservableObject {
 
 extension AppRouter: AppRouterProtocol {}
 
-
-//@MainActor
-//public final class CampaignRouter: ObservableObject {
-//    @Published public var path: [CampaignRoute] = []
-//    public init() {}
-//    public func navigate(to route: CampaignRoute) { path.append(route) }
-//    public func goBack()   { if !path.isEmpty { path.removeLast() } }
-//    public func goToRoot() { path.removeAll() }
-//}
-
 @MainActor
 class CampaignRouter: ObservableObject, AppRouterProtocol {
     @Published public var path: [CampaignRoute] = []
@@ -80,7 +68,3 @@ class CampaignRouter: ObservableObject, AppRouterProtocol {
     }
     
 }
-
-
-
-

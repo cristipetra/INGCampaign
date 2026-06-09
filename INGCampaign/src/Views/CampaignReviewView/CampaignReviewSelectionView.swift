@@ -18,7 +18,7 @@ struct CampaignReviewSelectionView<ViewModel: CampaignReviewSelectionViewModelli
     var body: some View {
         
         ScrollView {
-            VStack {
+            VStack(spacing: 10) {
                 Text("Selected campaigns")
                 
                 ForEach(viewModel.campaignRows) { row in

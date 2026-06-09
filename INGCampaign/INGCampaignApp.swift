@@ -15,7 +15,6 @@ struct INGCampaignApp: App {
     var body: some Scene {
         WindowGroup {
             AppRootView(container: appDIContainer)
-                
         }
     }
 }
