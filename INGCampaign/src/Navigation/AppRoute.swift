@@ -20,8 +20,8 @@ enum AppRoute: Hashable {
 enum CampaignRoute: Hashable {
     case targetSelection
     case channelList(channels: [CampaignChannel])
-    //case channelList
     case campaignSelection(channel: CampaignChannel)
+    case reviewSelection
 }
 
 protocol ViewFactory {

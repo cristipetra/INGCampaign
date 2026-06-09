@@ -34,6 +34,13 @@ struct CampaignSelectionView<ViewModel: CampaignSelectionViewModelling>: View {
                         )
                     }
                 }
+                
+                Button("Reset") {
+                    viewModel.onResetSelection()
+                }
+                .buttonStyle(.borderedProminent)
+                .controlSize(.large)
+                
             }
         }
         .task {

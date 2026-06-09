@@ -17,6 +17,7 @@ protocol CampaignSelectionViewModelling: ObservableObject {
     
     func loadChannelsDetails() async
     func onSelectedCampaignPricing(monthlyFee: MonthlyFee)
+    func onResetSelection()
 }
 
 @MainActor
@@ -25,7 +26,7 @@ class CampaignSelectionViewModel: CampaignSelectionViewModelling {
     internal var channel: CampaignChannel
     private var services: ChannelServicesProtocol
     private let router: AppRouterProtocol
-    private var campaingManager: CampaignConfigurationManagerProtocol
+    private var campaignManager: CampaignConfigurationManagerProtocol
     
     @Published public var isLoading: Bool = false
     @Published public var errorMessage: String?
@@ -37,11 +38,11 @@ class CampaignSelectionViewModel: CampaignSelectionViewModelling {
     public init(channel: CampaignChannel,
                 services: ChannelServicesProtocol,
                 router: AppRouterProtocol,
-                campaingManager: CampaignConfigurationManagerProtocol) {
+                campaignManager: CampaignConfigurationManagerProtocol) {
         self.channel = channel
         self.services = services
         self.router = router
-        self.campaingManager = campaingManager
+        self.campaignManager = campaignManager
     }
     
     var pricingRows: [CampaignPricingRow] {
@@ -66,8 +67,7 @@ class CampaignSelectionViewModel: CampaignSelectionViewModelling {
         
         do {
             channelPricing = try await services.getChanellDetails(channelId: channel.channelId)
-            selectedCampaignPricingMonthlyFee = campaingManager.selectedCampaigns[channel.channelId]
-            
+            selectedCampaignPricingMonthlyFee = campaignManager.selectedCampaigns[channel.channelId]
         } catch {
             errorMessage = "Failed to fetch targeting categories. Please try again later."
         }
@@ -76,7 +76,12 @@ class CampaignSelectionViewModel: CampaignSelectionViewModelling {
     
     func onSelectedCampaignPricing(monthlyFee: MonthlyFee) {
         self.selectedCampaignPricingMonthlyFee = monthlyFee
-        campaingManager.selectedCampaigns[channel.channelId] = monthlyFee
+        campaignManager.selectedCampaigns[channel.channelId] = monthlyFee
+    }
+    
+    func onResetSelection() {
+        campaignManager.selectedCampaigns[channel.channelId] = nil
+        self.selectedCampaignPricingMonthlyFee = nil
     }
     
 }

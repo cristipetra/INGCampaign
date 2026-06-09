@@ -16,6 +16,7 @@ protocol DependencyContainer {
     func makeTargetingSelectionViewModel(router: AppRouterProtocol) -> TargetingSelectionViewModel
     func makeChannelListViewModel(campaignChannels: [CampaignChannel], router: AppRouterProtocol) -> ChannelListViewModel
     func makeCampaingSelectionViewModel(campaignChannel: CampaignChannel, router: AppRouterProtocol) -> CampaignSelectionViewModel
+    func makeCampaignReviewSelectionViewModel() -> CampaignReviewSelectionViewModel
 }
 
 class AppDependencyContainer: DependencyContainer {
@@ -39,6 +40,10 @@ class AppDependencyContainer: DependencyContainer {
     }
     
     func makeCampaingSelectionViewModel(campaignChannel: CampaignChannel, router: AppRouterProtocol) -> CampaignSelectionViewModel {
-        CampaignSelectionViewModel(channel: campaignChannel, services: channelServices, router: router, campaingManager: campaignManager)
+        CampaignSelectionViewModel(channel: campaignChannel, services: channelServices, router: router, campaignManager: campaignManager)
+    }
+    
+    func makeCampaignReviewSelectionViewModel() -> CampaignReviewSelectionViewModel{
+        CampaignReviewSelectionViewModel(campaignManager: campaignManager)
     }
 }

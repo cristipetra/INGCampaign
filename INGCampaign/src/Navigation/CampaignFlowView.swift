@@ -42,6 +42,10 @@ struct CampaignFlowView: View {
                     router: router
                 )
             )
+        case .reviewSelection:
+            CampaignReviewSelectionView(
+                viewModel: container.makeCampaignReviewSelectionViewModel()
+            )
         }
     }
 }

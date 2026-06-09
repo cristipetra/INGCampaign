@@ -27,11 +27,11 @@ struct ChannelListView<ViewModel: ChannelListViewModelling>: View {
                     }
             }
             
-            Text("Based on your targeting selection:")
-        }
-        
-        .task {
-            //await viewModel.loadChannelsDetails()
+            Button("Review selections") {
+                viewModel.onTapReviewSelection()
+            }
+            .buttonStyle(.borderedProminent)
+            .controlSize(.large)
         }
     }
 }
