@@ -22,6 +22,8 @@ struct ChannelListView<ViewModel: ChannelListViewModelling>: View {
             
             List(viewModel.campaignChannels) { channel in
                 Text(channel.channel)
+                    .frame(maxWidth: .infinity, alignment: .leading)
+                    .contentShape(Rectangle())
                     .onTapGesture {
                         viewModel.onTapChannel(channel: channel)
                     }

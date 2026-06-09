@@ -28,7 +28,7 @@ struct TargetingSelectionView<ViewModel: TargetingSelectionViewModelling>: View 
                 
                 ForEach(viewModel.targetingCategories) { item in
                     Text(item.target)
-                        .frame(maxWidth: .infinity, alignment: .leading)  // fill the row width
+                        .frame(maxWidth: .infinity, alignment: .leading)
                         .contentShape(Rectangle())
                         .onTapGesture(perform: {
                             print("\(item.target)")
